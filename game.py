@@ -4,6 +4,9 @@ import pygame
 import sys
 
 
+# Function
+
+
 screen = pygame.display.set_mode((576, 900))
 clock = pygame.time.Clock()
 
@@ -14,6 +17,7 @@ bg_surface = pygame.transform.scale2x(bg_surface)
 # -------------Floor---------------------
 floor = pygame.image.load('assets/base.png').convert()
 floor = pygame.transform.scale2x(floor)
+floor_x_pos = 0
 
 while True:
     for event in pygame.event.get():
@@ -24,7 +28,8 @@ while True:
     # ------Blit background----
     screen.blit(bg_surface, (0,0))
     # ------Blit floor --------
-    screen.blit(floor, (0, 800))
+    floor_x_pos -= 1
+    screen.blit(floor, (floor_x_pos, 800))
 
     pygame.display.update()
     clock.tick(120)
