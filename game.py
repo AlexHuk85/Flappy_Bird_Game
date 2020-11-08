@@ -4,9 +4,13 @@ import pygame
 import sys
 
 
-# Function
+# ---------------Function-----------------------
+def draw_floor():
+    screen.blit(floor, (floor_x_pos, 800))
+    screen.blit(floor, (floor_x_pos + 576, 800))
 
 
+# ------------Screen --------------------------
 screen = pygame.display.set_mode((576, 900))
 clock = pygame.time.Clock()
 
@@ -29,7 +33,9 @@ while True:
     screen.blit(bg_surface, (0,0))
     # ------Blit floor --------
     floor_x_pos -= 1
-    screen.blit(floor, (floor_x_pos, 800))
+    draw_floor()
+    if floor_x_pos <= -576:
+        floor_x_pos = 0
 
     pygame.display.update()
     clock.tick(120)
