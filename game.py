@@ -13,8 +13,9 @@ def draw_floor():
 
 def create_pipe():
     random_height = random.choice(pipe_height)
-    new_pipe = pipe.get_rect(midtop=(700, random_height))
-    return new_pipe
+    bottom_pipe = pipe.get_rect(midtop=(700, random_height))
+    top_pipe = pipe.get_rect(midbottom=(700, random_height - 300))
+    return bottom_pipe, top_pipe
 
 
 def move_pipe(pipes):
@@ -49,7 +50,7 @@ bird_movement = 0
 pipe = pygame.image.load('assets/pipe-green.png').convert()
 pipe = pygame.transform.scale2x(pipe)
 pipe_list = []
-pipe_height = [x for x in range(250, 750)]
+pipe_height = [x for x in range(350, 650)]
 SPAWNPIPE = pygame.USEREVENT
 pygame.time.set_timer(SPAWNPIPE, 1200)
 
@@ -68,7 +69,7 @@ while True:
                     bird_rect.centery = 0
         # -------------For spawn pipe every 1.2 second-----
         if event.type == SPAWNPIPE:
-            pipe_list.append(create_pipe())
+            pipe_list.extend(create_pipe()) # append = 1 item, extend = tuple
 
     # ------Blit background----
     screen.blit(bg_surface, (0, 0))
