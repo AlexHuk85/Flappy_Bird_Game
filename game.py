@@ -11,7 +11,7 @@ def draw_floor():
 
 
 def create_pipe():
-    new_pipe = pipe.get_rect(midtop=(288, 500))
+    new_pipe = pipe.get_rect(midtop=(700, 500))
     return new_pipe
 
 
@@ -24,6 +24,7 @@ def move_pipe(pipes):
 def draw_pipe(pipes):
     for p in pipes:
         screen.blit(pipe, p)
+
 
 # ------------Screen --------------------------
 screen = pygame.display.set_mode((576, 900))
