@@ -26,7 +26,11 @@ def move_pipe(pipes):
 
 def draw_pipe(pipes):
     for p in pipes:
-        screen.blit(pipe, p)
+        if p.bottom >= 900:
+            screen.blit(pipe, p)
+        else:
+            flip_pipe = pygame.transform.flip(pipe, False, True)
+            screen.blit(flip_pipe, p)
 
 
 # ------------Screen --------------------------
