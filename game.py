@@ -89,6 +89,8 @@ while True:
     # -------Blit pipe----------
     pipe_list = move_pipe(pipe_list)
     draw_pipe(pipe_list)
+    if len(pipe_list) > 5:
+        pipe_list.remove(pipe_list[0])
 
     pygame.display.update()
     clock.tick(120)
