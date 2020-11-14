@@ -2,6 +2,7 @@ __author__ = 'Alex'
 
 import pygame
 import sys
+import random
 
 
 # ---------------Function-----------------------
@@ -11,7 +12,8 @@ def draw_floor():
 
 
 def create_pipe():
-    new_pipe = pipe.get_rect(midtop=(700, 500))
+    random_height = random.choice(pipe_height)
+    new_pipe = pipe.get_rect(midtop=(700, random_height))
     return new_pipe
 
 
@@ -47,6 +49,7 @@ bird_movement = 0
 pipe = pygame.image.load('assets/pipe-green.png').convert()
 pipe = pygame.transform.scale2x(pipe)
 pipe_list = []
+pipe_height = [x for x in range(250, 750)]
 SPAWNPIPE = pygame.USEREVENT
 pygame.time.set_timer(SPAWNPIPE, 1200)
 
