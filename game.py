@@ -59,9 +59,9 @@ floor = pygame.image.load('assets/base.png').convert()
 floor = pygame.transform.scale2x(floor)
 floor_x_pos = 0
 # --------------Bird----------------------------
-bird = pygame.image.load('assets/bluebird-midflap.png').convert()
+bird = pygame.image.load('assets/bluebird-midflap.png').convert_alpha()
 bird = pygame.transform.scale2x(bird)
-bird_rect = bird.get_rect(center=(100, 500))
+bird_rect = bird.get_rect(center=(100, 450))
 gravity = 0.35  
 bird_movement = 0
 
@@ -89,7 +89,7 @@ while True:
             if event.key == pygame.K_SPACE and game_active == False:
                 game_active = True
                 pipe_list.clear()
-                bird_rect.center = (100, 500)
+                bird_rect.center = (100, 450)
                 bird_movement = 0
 
         # -------------For spawn pipe every 1.2 second-----
