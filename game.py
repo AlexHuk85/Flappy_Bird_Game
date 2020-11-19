@@ -43,6 +43,11 @@ def check_collision(pipes):
     return True
 
 
+def rotated_bird(bird):
+    new_bird = pygame.transform.rotozoom(bird, -bird_movement * 3, 1)
+    return new_bird
+
+
 # ------------Screen --------------------------
 screen = pygame.display.set_mode((576, 900))
 clock = pygame.time.Clock()
@@ -57,7 +62,7 @@ floor_x_pos = 0
 bird = pygame.image.load('assets/bluebird-midflap.png').convert()
 bird = pygame.transform.scale2x(bird)
 bird_rect = bird.get_rect(center=(100, 500))
-gravity = 0.25
+gravity = 0.35  
 bird_movement = 0
 
 # -------------------Pipes---------------------
@@ -78,11 +83,15 @@ while True:
             sys.exit()
         # --------------For Controlling Bird----------------
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
+            if event.key == pygame.K_SPACE and game_active:
                 bird_movement = 0
                 bird_movement -= 10
-                if bird_rect.centery <= 0:
-                    bird_rect.centery = 0
+            if event.key == pygame.K_SPACE and game_active == False:
+                game_active = True
+                pipe_list.clear()
+                bird_rect.center = (100, 500)
+                bird_movement = 0
+
         # -------------For spawn pipe every 1.2 second-----
         if event.type == SPAWNPIPE:
             pipe_list.extend(create_pipe()) # append = 1 item, extend = tuple
@@ -98,8 +107,9 @@ while True:
     if game_active:
         # ------Blit Bird ---------
         bird_movement += gravity
+        roteted_bird = rotated_bird(bird)
         bird_rect.centery += bird_movement
-        screen.blit(bird, bird_rect)
+        screen.blit(roteted_bird, bird_rect)
         # -------Blit pipe----------
         pipe_list = move_pipe(pipe_list)
         draw_pipe(pipe_list)
